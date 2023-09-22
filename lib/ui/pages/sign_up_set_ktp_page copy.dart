@@ -3,8 +3,8 @@ import 'package:bank_sha/ui/widgets/buttons.dart';
 import 'package:bank_sha/ui/widgets/forms.dart';
 import 'package:flutter/material.dart';
 
-class SignInPage extends StatelessWidget {
-  const SignInPage({super.key});
+class SignUpSetKtp extends StatelessWidget {
+  const SignUpSetKtp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class SignInPage extends StatelessWidget {
             width: 155,
             margin: const EdgeInsets.only(
               top: 100,
-              bottom: 100,
+              bottom: 50,
             ),
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -29,7 +29,7 @@ class SignInPage extends StatelessWidget {
             ),
           ),
           Text(
-            'Sign In &\nGrow Your Finance',
+            'Verify Your\nAccount',
             style: blackTextStyle.copyWith(
               fontSize: 20,
               fontWeight: bold,
@@ -46,48 +46,59 @@ class SignInPage extends StatelessWidget {
             ),
             child: Column(
               // Email Input
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CustomFormField(
-                  title: 'Email Address',
+                Container(
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: lightBackgroundColor,
+                  ),
+                  child: Center(
+                    child: Image.asset(
+                      'assets/ic_upload.png',
+                      width: 32,
+                    ),
+                  ),
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
-                // password Input
-                const CustomFormField(
-                  title: 'Password',
-                  obscureText: true,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    'Forgot Passowrd',
-                    style: blueTextStyle,
+                // Container(
+                //   width: 120,
+                //   height: 120,
+                //   decoration: const BoxDecoration(
+                //     shape: BoxShape.circle,
+                //     image: DecorationImage(
+                //       fit: BoxFit.cover,
+                //       image: AssetImage(
+                //         'assets/img_profile.png',
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                const SizedBox(height: 16),
+                Text(
+                  'Passport/ID Card',
+                  style: blackTextStyle.copyWith(
+                    fontSize: 18,
+                    fontWeight: medium,
                   ),
                 ),
                 const SizedBox(height: 30),
                 CustomFilledButton(
-                  title: "Sign in",
+                  title: "Continue",
                   onPressed: () {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, '/home', (route) => false);
+                    Navigator.pushNamed(context, '/sign-up-success');
                   },
-                )
+                ),
               ],
             ),
           ),
           const SizedBox(
-            height: 30,
+            height: 60,
           ),
           CustomTextButton(
-            title: 'Create New Account',
-            onPressed: () {
-              Navigator.pushNamed(context, '/sign-up');
-            },
+            title: 'Skip for Now',
+            onPressed: () {},
           ),
         ],
       ),
