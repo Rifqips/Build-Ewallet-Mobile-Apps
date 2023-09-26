@@ -1,4 +1,7 @@
 import 'package:bank_sha/shared/theme.dart';
+import 'package:bank_sha/ui/pages/data_package_page.dart';
+import 'package:bank_sha/ui/pages/data_provider_page.dart';
+import 'package:bank_sha/ui/pages/data_success_page.dart';
 import 'package:bank_sha/ui/pages/home_page.dart';
 import 'package:bank_sha/ui/pages/onboarding_page.dart';
 import 'package:bank_sha/ui/pages/pin_page.dart';
@@ -15,9 +18,12 @@ import 'package:bank_sha/ui/pages/splash_page.dart';
 import 'package:bank_sha/ui/pages/topup_amount.dart';
 import 'package:bank_sha/ui/pages/topup_page.dart';
 import 'package:bank_sha/ui/pages/topup_success.dart';
+import 'package:bank_sha/ui/pages/transfer_amount_page.dart';
+import 'package:bank_sha/ui/pages/transfer_page.dart';
+import 'package:bank_sha/ui/pages/transfer_success_page.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -35,10 +41,8 @@ class MyApp extends StatelessWidget {
           iconTheme: IconThemeData(
             color: blackColor,
           ),
-          titleTextStyle: blackTextStyle.copyWith(
-            fontSize: 20,
-            fontWeight: semiBold
-          ),
+          titleTextStyle:
+              blackTextStyle.copyWith(fontSize: 20, fontWeight: semiBold),
         ),
       ),
       routes: {
@@ -58,15 +62,12 @@ class MyApp extends StatelessWidget {
         '/topup': (context) => const TopupPage(),
         '/topup-amount': (context) => const TopupAmountPage(),
         '/topup-success': (context) => const TopupSuccessPage(),
-        // '/sign-up-success': (context) => const SignUpSuccessPage(),
-        // '/home': (context) => const HomePage(),
-        // '/profile-edit-success': (context) => const ProfileEditSuccessPage(),
-        // '/topup': (context) => const TopupPage(),
-        // '/topup-success': (context) => const TopupSuccessPage(),
-        // '/transfer': (context) => const TransferPage(),
-        // '/transfer-success': (context) => const TransferSuccessPage(),
-        // '/data-provider': (context) => const DataProviderPage(),
-        // '/data-success': (context) => const DataSuccessPage(),
+        '/transfer': (context) => const TransferPage(),
+        '/transfer-amount': (context) => const TransferAmountPage(),
+        '/transfer-success': (context) => const TransferSuccessPage(),
+        '/data-provider': (context) => const DataProviderPage(),
+        '/data-package': (context) => const DataPackagePage(),
+        '/data-success': (context) => const DataSuccessPage(),
       },
     );
   }

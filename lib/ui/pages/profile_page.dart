@@ -84,7 +84,6 @@ class ProfilePage extends StatelessWidget {
                       // ignore: use_build_context_synchronously
                       Navigator.pushNamed(context, '/profile-edit');
                     }
-                    ;
                   },
                 ),
                 ProfileMenuItem(

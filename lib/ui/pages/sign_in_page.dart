@@ -47,7 +47,7 @@ class SignInPage extends StatelessWidget {
               // Email Input
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomFormField(
+                const CustomFormField(
                   title: 'Email Address',
                 ),
                 const SizedBox(

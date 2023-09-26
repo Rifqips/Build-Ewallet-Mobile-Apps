@@ -17,7 +17,7 @@ class ProfileEditPage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         children: [
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Container(

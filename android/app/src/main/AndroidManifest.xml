@@ -3,7 +3,7 @@
     <application
         android:label="bank_sha"
         android:name="${applicationName}"
-        android:icon="@mipmap/img_logo_dark">
+        android:icon="@mipmap/img_logo_light">
         <activity
             android:name=".MainActivity"
             android:exported="true"

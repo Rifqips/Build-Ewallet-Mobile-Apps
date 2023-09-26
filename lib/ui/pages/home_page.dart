@@ -1,3 +1,4 @@
+import 'package:bank_sha/shared/shared_metods.dart';
 import 'package:bank_sha/shared/theme.dart';
 import 'package:bank_sha/ui/widgets/home_latest_transaction_item.dart';
 import 'package:bank_sha/ui/widgets/home_service_item.dart';
@@ -210,7 +211,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Text(
-            '5,209,400',
+            formatCurrency(12500),
             style: whiteTextStyle.copyWith(
               fontSize: 24,
               fontWeight: semiBold,
@@ -249,7 +250,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Text(
-                'of 10M',
+                ' of ${formatCurrency(20000)}',
                 style: blackTextStyle.copyWith(
                   fontWeight: semiBold,
                 ),
@@ -302,7 +303,9 @@ class HomePage extends StatelessWidget {
               HomeServiceItem(
                 iconUrl: 'assets/ic_send.png',
                 title: 'Send',
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, '/transfer');
+                },
               ),
               HomeServiceItem(
                 iconUrl: 'assets/ic_withdraw.png',
@@ -312,7 +315,12 @@ class HomePage extends StatelessWidget {
               HomeServiceItem(
                 iconUrl: 'assets/ic_more.png',
                 title: 'More',
-                onTap: () {},
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => const MoreDialog(),
+                  );
+                },
               ),
             ],
           ),
@@ -337,7 +345,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.all(22),
+            padding: const EdgeInsets.all(22),
             margin: const EdgeInsets.only(
               top: 14,
             ),
@@ -345,37 +353,37 @@ class HomePage extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               color: whiteColor,
             ),
-            child: const Column(
+            child: Column(
               children: [
                 HomeLatestTransactionItem(
                   iconUrl: 'assets/ic_transaction_cat1.png',
                   title: 'Top Up',
                   date: 'Yesterday  ',
-                  value: '450.000',
+                  value: '+ ${formatCurrency(450000, symbol: '')}',
                 ),
                 HomeLatestTransactionItem(
                   iconUrl: 'assets/ic_transaction_cat2.png',
                   title: 'Cashback',
                   date: 'Sep 11',
-                  value: '22.000',
+                  value: '- ${formatCurrency(22000, symbol: '')}',
                 ),
                 HomeLatestTransactionItem(
                   iconUrl: 'assets/ic_transaction_cat3.png',
                   title: 'Withdraw',
                   date: 'Sep 2',
-                  value: '- 5000',
+                  value: '- ${formatCurrency(5000, symbol: '')}',
                 ),
                 HomeLatestTransactionItem(
                   iconUrl: 'assets/ic_transaction_cat4.png',
                   title: 'Transfer',
                   date: 'Aug 27',
-                  value: '- 123.500',
+                  value: '- ${formatCurrency(123500, symbol: '')}',
                 ),
                 HomeLatestTransactionItem(
                   iconUrl: 'assets/ic_transaction_cat5.png',
                   title: 'Electric',
                   date: 'Aug 27',
-                  value: '- 12. 123.500',
+                  value: '- ${formatCurrency(12123500, symbol: '')}',
                 ),
               ],
             ),
@@ -477,6 +485,81 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class MoreDialog extends StatelessWidget {
+  const MoreDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: EdgeInsets.zero,
+      alignment: Alignment.bottomCenter,
+      content: Container(
+        height: 326,
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.all(30),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(40),
+          color: lightBackgroundColor,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Do More With Us',
+              style: blackTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: medium,
+              ),
+            ),
+            const SizedBox(
+              height: 13,
+            ),
+            Wrap(
+              spacing: 20,
+              runSpacing: 15,
+              children: [
+                HomeServiceItem(
+                  iconUrl: 'assets/ic_product_data.png',
+                  title: 'Data',
+                  onTap: () {
+                    Navigator.pushNamed(context, '/data-provider');
+                  },
+                ),
+                HomeServiceItem(
+                  iconUrl: 'assets/ic_product_water.png',
+                  title: 'Water',
+                  onTap: () {},
+                ),
+                HomeServiceItem(
+                  iconUrl: 'assets/ic_product_stream.png',
+                  title: 'Stream',
+                  onTap: () {},
+                ),
+                HomeServiceItem(
+                  iconUrl: 'assets/ic_product_movie.png',
+                  title: 'Movie',
+                  onTap: () {},
+                ),
+                HomeServiceItem(
+                  iconUrl: 'assets/ic_product_food.png',
+                  title: 'Food',
+                  onTap: () {},
+                ),
+                HomeServiceItem(
+                  iconUrl: 'assets/ic_product_travel.png',
+                  title: 'Travel',
+                  onTap: () {},
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
