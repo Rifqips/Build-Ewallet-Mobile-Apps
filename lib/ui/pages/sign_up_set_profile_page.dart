@@ -1,12 +1,13 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:bank_sha/models/sign_up_form_model.dart';
 import 'package:bank_sha/shared/shared_metods.dart';
 import 'package:bank_sha/shared/theme.dart';
+import 'package:bank_sha/ui/pages/sign_up_set_ktp_page.dart';
 import 'package:bank_sha/ui/widgets/buttons.dart';
 import 'package:bank_sha/ui/widgets/forms.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SignUpSetProfile extends StatefulWidget {
@@ -24,6 +25,13 @@ class SignUpSetProfile extends StatefulWidget {
 class _SignUpSetProfileState extends State<SignUpSetProfile> {
   final pinController = TextEditingController(text: '');
   XFile? selectedImage;
+
+  bool validate() {
+    if (pinController.text.length != 6) {
+      return false;
+    }
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,12 +123,33 @@ class _SignUpSetProfileState extends State<SignUpSetProfile> {
                   obscureText: true,
                   title: 'Set PIN (6 digit number)',
                   controller: pinController,
+                  keyboarType: TextInputType.phone,
                 ),
                 const SizedBox(height: 30),
                 CustomFilledButton(
                   title: "Continue",
                   onPressed: () {
-                    Navigator.pushNamed(context, '/sign-up-set-ktp');
+                    if (validate()) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignUpSetKtp(
+                            data: widget.data.copyWith(
+                              pin: pinController.text,
+                              profilePicture: selectedImage == null
+                                  ? null
+                                  : 'data:image/png;base64,' +
+                                      base64Encode(
+                                        File(selectedImage!.path)
+                                            .readAsBytesSync(),
+                                      ),
+                            ),
+                          ),
+                        ),
+                      );
+                    } else {
+                      showCustomSnackBar(context, 'PIN harus 6 digit');
+                    }
                   },
                 )
               ],
