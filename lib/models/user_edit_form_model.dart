@@ -15,10 +15,10 @@ class UserEditFormModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'username': username,
       'name': name,
       'email': email,
       'password': password,
-      'username': username,
       'pin': pin,
     };
   }

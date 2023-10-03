@@ -82,6 +82,30 @@ class AuthService {
     }
   }
 
+  Future<void> logout() async {
+    try {
+      final token = await getToken();
+      final res = await http.post(
+          Uri.parse(
+            '$baseUrl/logout',
+          ),
+          headers: {
+            'Authorization': token,
+          });
+
+      print(res.body);
+
+      if (res.statusCode == 200) {
+        await clearLocalStorage();
+      } else {
+        throw jsonDecode(res.body)['message'];
+      }
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+
   Future<void> storeCredentialToLocal(UserModel user) async {
     try {
       const storage = FlutterSecureStorage();
