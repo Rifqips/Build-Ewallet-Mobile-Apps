@@ -1,18 +1,10 @@
+import 'package:bank_sha/models/user_model.dart';
 import 'package:bank_sha/shared/theme.dart';
 import 'package:flutter/material.dart';
 
 class TranserRecentUserItem extends StatelessWidget {
-  final String imgUrl;
-  final String name;
-  final String username;
-  final bool isVerified;
-  const TranserRecentUserItem({
-    Key? key,
-    required this.imgUrl,
-    required this.name,
-    required this.username,
-    this.isVerified = false,
-  }) : super(key: key);
+  final UserModel user;
+  const TranserRecentUserItem({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +26,11 @@ class TranserRecentUserItem extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                image: AssetImage(imgUrl),
+                image: user.profilePicture == null
+                    ? const AssetImage(
+                        'assetes/img_profile.png',
+                      )
+                    : NetworkImage(user.profilePicture!) as ImageProvider,
               ),
             ),
           ),
@@ -42,7 +38,7 @@ class TranserRecentUserItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                name,
+                user.name.toString(),
                 style: blackTextStyle.copyWith(
                   fontSize: 16,
                   fontWeight: medium,
@@ -52,7 +48,7 @@ class TranserRecentUserItem extends StatelessWidget {
                 height: 2,
               ),
               Text(
-                '@$username',
+                user.username.toString(),
                 style: greyTextStyle.copyWith(
                   fontSize: 12,
                 ),
@@ -60,7 +56,7 @@ class TranserRecentUserItem extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          if (isVerified)
+          if (user.verified == 1)
             Row(
               children: [
                 Icon(

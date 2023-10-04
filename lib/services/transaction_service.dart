@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bank_sha/models/topup_form_model.dart';
+import 'package:bank_sha/models/transfer_form_model.dart';
 import 'package:bank_sha/services/auth_service.dart';
 import 'package:bank_sha/shared/shared_values.dart';
 import 'package:http/http.dart' as http;
@@ -32,29 +33,29 @@ class TransactionService {
     }
   }
 
-  // Future<void> transfer(TransferFormModel data) async {
-  //   try {
-  //     print(data.toJson());
-  //     final token = await AuthService().getToken();
+  Future<void> transfer(TransferFormModel data) async {
+    try {
+      print(data.toJson());
+      final token = await AuthService().getToken();
 
-  //     final res = await http.post(
-  //       Uri.parse('$baseUrl/transfers'),
-  //       headers: {
-  //         'Authorization': 'Bearer $token',
-  //       },
-  //       body: data.toJson(),
-  //     );
+      final res = await http.post(
+        Uri.parse('$baseUrl/transfers'),
+        headers: {
+          'Authorization': token,
+        },
+        body: data.toJson(),
+      );
 
-  //     print(res.body);
-  //     print(res.statusCode);
+      print(res.body);
+      print(res.statusCode);
 
-  //     if (res.statusCode != 200) {
-  //       throw jsonDecode(res.body)['message'];
-  //     }
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
+      if (res.statusCode != 200) {
+        throw jsonDecode(res.body)['message'];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   // Future<List<OperatorCardModel>> getOperatorCards() async {
   //   try {

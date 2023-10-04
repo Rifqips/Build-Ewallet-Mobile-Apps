@@ -136,7 +136,7 @@ class _TopupPageState extends State<TopupPage> {
       ),
       floatingActionButton: (selectedPaymentMethod != null)
           ? Container(
-              margin: EdgeInsets.symmetric(horizontal: 24),
+              margin: const EdgeInsets.all(24),
               child: CustomFilledButton(
                 title: "Continue",
                 onPressed: () {
