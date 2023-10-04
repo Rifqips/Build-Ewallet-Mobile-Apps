@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:bank_sha/models/data_plan_form_model.dart';
 import 'package:bank_sha/models/topup_form_model.dart';
 import 'package:bank_sha/models/transfer_form_model.dart';
 import 'package:bank_sha/services/auth_service.dart';
@@ -7,7 +8,6 @@ import 'package:bank_sha/shared/shared_values.dart';
 import 'package:http/http.dart' as http;
 
 class TransactionService {
-
   Future<String> topUp(TopupFormModel data) async {
     try {
       print(data.toJson());
@@ -57,6 +57,30 @@ class TransactionService {
     }
   }
 
+  Future<void> dataPlan(DataPlanFormModel data) async {
+    try {
+      print(data.toJson());
+      final token = await AuthService().getToken();
+
+      final res = await http.post(
+        Uri.parse('$baseUrl/data_plans'),
+        headers: {
+          'Authorization': token,
+        },
+        body: data.toJson(),
+      );
+
+      print(res.body);
+      print(res.statusCode);
+
+      if (res.statusCode != 200) {
+        throw jsonDecode(res.body)['message'];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   // Future<List<OperatorCardModel>> getOperatorCards() async {
   //   try {
   //     final token = await AuthService().getToken();
@@ -79,30 +103,6 @@ class TransactionService {
   //     }
 
   //     return throw jsonDecode(res.body)['message'];
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
-
-  // Future<void> dataPlan(DataPlanFormModel data) async {
-  //   try {
-  //     print(data.toJson());
-  //     final token = await AuthService().getToken();
-
-  //     final res = await http.post(
-  //       Uri.parse('$baseUrl/data_plans'),
-  //       headers: {
-  //         'Authorization': 'Bearer $token',
-  //       },
-  //       body: data.toJson(),
-  //     );
-
-  //     print(res.body);
-  //     print(res.statusCode);
-
-  //     if (res.statusCode != 200) {
-  //       throw jsonDecode(res.body)['message'];
-  //     }
   //   } catch (e) {
   //     rethrow;
   //   }
