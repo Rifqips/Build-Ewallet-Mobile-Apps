@@ -13,6 +13,7 @@ import 'package:bank_sha/ui/pages/sign_in_page.dart';
 import 'package:bank_sha/ui/pages/sign_up_page.dart';
 import 'package:bank_sha/ui/pages/sign_up_success_page.dart';
 import 'package:bank_sha/ui/pages/splash_page.dart';
+import 'package:bank_sha/ui/pages/topup_amount.dart';
 import 'package:bank_sha/ui/pages/topup_page.dart';
 import 'package:bank_sha/ui/pages/topup_success.dart';
 import 'package:bank_sha/ui/pages/transfer_page.dart';
