@@ -1,4 +1,5 @@
 import 'package:bank_sha/blocs/auth/auth_bloc.dart';
+import 'package:bank_sha/blocs/transaction/transaction_bloc.dart';
 import 'package:bank_sha/shared/shared_metods.dart';
 import 'package:bank_sha/shared/theme.dart';
 import 'package:bank_sha/ui/widgets/home_latest_transaction_item.dart';
@@ -87,7 +88,7 @@ class HomePage extends StatelessWidget {
           buildWalletCard(),
           buildLevel(),
           buildServices(context),
-          buildLatestTransactions(),
+          // buildLatestTransactions(),
           buildSendAgain(),
           buildFriendlyTips(),
         ],
@@ -375,39 +376,23 @@ class HomePage extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               color: whiteColor,
             ),
-            child: Column(
-              children: [
-                HomeLatestTransactionItem(
-                  iconUrl: 'assets/ic_transaction_cat1.png',
-                  title: 'Top Up',
-                  date: 'Yesterday  ',
-                  value: '+ ${formatCurrency(450000, symbol: '')}',
-                ),
-                HomeLatestTransactionItem(
-                  iconUrl: 'assets/ic_transaction_cat2.png',
-                  title: 'Cashback',
-                  date: 'Sep 11',
-                  value: '- ${formatCurrency(22000, symbol: '')}',
-                ),
-                HomeLatestTransactionItem(
-                  iconUrl: 'assets/ic_transaction_cat3.png',
-                  title: 'Withdraw',
-                  date: 'Sep 2',
-                  value: '- ${formatCurrency(5000, symbol: '')}',
-                ),
-                HomeLatestTransactionItem(
-                  iconUrl: 'assets/ic_transaction_cat4.png',
-                  title: 'Transfer',
-                  date: 'Aug 27',
-                  value: '- ${formatCurrency(123500, symbol: '')}',
-                ),
-                HomeLatestTransactionItem(
-                  iconUrl: 'assets/ic_transaction_cat5.png',
-                  title: 'Electric',
-                  date: 'Aug 27',
-                  value: '- ${formatCurrency(12123500, symbol: '')}',
-                ),
-              ],
+            child: BlocProvider(
+              create: (context) => TransactionBloc()..add(TransactionGet()),
+              child: BlocBuilder<TransactionBloc, TransactionState>(
+                builder: (context, state) {
+                  if (state is TransactionSuccess) {
+                    return Column(
+                      children: state.transactions.map((transaction) {
+                        return HomeLatestTransactionItem(
+                            transaction: transaction);
+                      }).toList(),
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
             ),
           ),
         ],
