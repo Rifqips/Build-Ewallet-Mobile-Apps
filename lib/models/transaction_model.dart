@@ -21,9 +21,9 @@ class TransactionModel {
         id: json['id'],
         amount: json['amount'],
         createdAt: DateTime.tryParse(json['created_at']),
-        paymentMethod: json['paymentMethod'] == null
+        paymentMethod: json['payment_method'] == null
             ? null
-            : PaymentMethodModel.fromJson(json['paymentMethod']),
+            : PaymentMethodModel.fromJson(json['payment_method']),
         transactionType: json['transaction_type'] == null
             ? null
             : TransactionTypeModel.fromJson(json['transaction_type']),

@@ -17,8 +17,8 @@ class HomeLatestTransactionItem extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Image.network(
-            transaction.transactionType!.thumbnail!.toString(),
+          Image.asset(
+            'assets/img_profile.png',
             width: 48,
           ),
           const SizedBox(
@@ -52,7 +52,7 @@ class HomeLatestTransactionItem extends StatelessWidget {
           Text(
             formatCurrency(
               transaction.amount ?? 0,
-              symbol: transaction.transactionType?.action == 'cr' ? '- ' : '+ ',
+              symbol: transaction.transactionType?.action == 'cr' ? '+ ' : '- ',
             ),
             style: blackTextStyle.copyWith(
               fontSize: 16,
